@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reyn Gwyneth Fernandez | Projects Portfolio</title>
+    <style>
+        /* Modern Layout & Component System */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.5;
+            padding-bottom: 60px;
+        }
+
+        /* Header & Navigation Styling */
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: #3b82f6;
+        }
+
+        /* Container & Headers */
+        .projects-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+        }
+
+        /* Dynamic Filter Buttons */
+        .filter-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #ffffff;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-btn:hover {
+            background: #f1f5f9;
+            color: #0f172a;
+            border-color: #cbd5e1;
+        }
+
+        .filter-btn.active {
+            background: #3b82f6;
+            color: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+        }
+
+        /* Responsive Project Card Grid Layout */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 28px;
+        }
+
+        /* Project Cards & Micro-Interactions */
+        .project-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        opacity 0.2s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Card Scale/Lift Interaction */
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .card-content {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-tag {
+            align-self: flex-start;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .project-card h3 {
+            font-size: 1.35rem;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .project-card p {
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        /* Action Buttons Grid */
+        .card-links {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .btn-primary, .btn-secondary {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #0f172a;
+            color: #ffffff;
+            border: none;
+            flex-grow: 2;
+        }
+
+        .btn-primary:hover {
+            background: #334155;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            flex-grow: 1;
+        }
+
+        .btn-secondary:hover {
+            background: #f8fafc;
+            color: #0f172a;
+            border-color: #94a3b8;
+        }
+
+        /* Modal Overlay Background Blur */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 20px;
+        }
+
+        /* Active Modal State class */
+        .modal-overlay.is-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Modal Window Content Box & Entry Animation */
+        .modal-content {
+            background: #ffffff;
+            width: 100%;
+            max-width: 650px;
+            padding: 36px;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(0.95) translateY(10px);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.is-active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Close Button styling */
+        .modal-close-btn {
+            position: absolute;
+            top: 24px;
+            right: 28px;
+            background: #f1f5f9;
+            border: none;
+            font-size: 1.5rem;
+            color: #64748b;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close-btn:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        /* Typography & Customization inside Modal window */
+        .modal-body #modalTitle {
+            font-size: 1.75rem;
+            color: #0f172a;
+            margin: 12px 0 16px 0;
+        }
+
+        .modal-meta {
+            background: #f8fafc;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #334155;
+            margin-bottom: 24px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .modal-meta strong {
+            color: #0f172a;
+        }
+
+        .modal-body hr {
+            border: 0;
+            border-top: 1px solid #e2e8f0;
+            margin: 24px 0;
+        }
+
+        .modal-body h4 {
+            font-size: 1.1rem;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        #modalDescription {
+            color: #475569;
+            line-height: 1.7;
+            font-size: 1rem;
+            white-space: pre-line;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            background: #ffffff;
+            margin-top: 80px;
+        }
+
+        /* Responsive Layout Overrides */
+        @media (max-width: 640px) {
+            header {
+                flex-direction: column;
+                gap: 16px;
+                padding: 20px;
+            }
+            .projects-container {
+                margin: 20px auto;
+            }
+            h2 {
+                font-size: 1.75rem;
+            }
+            .modal-content {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Layout Header Module -->
+    <header>
+        <h1>Reyn Gwyneth Fernandez</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Interactive Grid Content -->
+    <main class="projects-container">
+        <h2>My Projects</h2>
+        <p class="subtitle">A dynamic, responsive showcase of solutions I've developed, blending UI aesthetics with lightweight software architectures.</p>
+
+        <!-- Dynamic Live Categories Filter Buttons -->
+        <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="web">Web Development</button>
+            <button class="filter-btn" data-filter="design">UI/UX Design</button>
+        </div>
+
+        <!-- Cards Container Grid -->
+        <div class="projects-grid">
+            
+            <!-- Project Card 1 -->
+            <div class="project-card" data-category="web" 
+                 data-tech="HTML5, CSS3, JavaScript (Vanilla ES6), Git Architecture"
+                 data-details="The portfolio website began as a streamlined solution to map and document my software engineering path. To maximize speed, it rejects heavy external styling engines or frontend frameworks in favor of native CSS variables and atomic components. 
+
+The primary architecture challenge was structuring a clean responsive system that looks natural across everything from mobile phones to ultra-wide displays. Performance-wise, structural assets were heavily compressed, achieving optimal asset transmission times and smooth micro-interactions across modern desktop and mobile browsers.">
+                <div class="card-content">
+                    <span class="project-tag">Frontend</span>
+                    <h3>Personal Portfolio Website</h3>
+                    <p>A responsive personal portfolio website built using HTML5, CSS3, and basic JavaScript to cleanly showcase interactive applications.</p>
+                    <div class="card-links">
+                        <button class="btn-primary open-modal-btn">Read Case Study</button>
+                        <a href="https://github.com/reyngwynethfernandez-cell/Portfolio" target="_blank" class="btn-secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="project-card" data-category="design" 
+                 data-tech="Figma, UI Component Mapping, Interactive Prototyping"
+                 data-details="This case study documents a full user experience redesign target for ecommerce platforms. Navigating complex categorizations can induce user friction; to mitigate this, the layout introduces contextual sidebar filters and breadcrumbs that change configuration fluidly.
+
+A complete design library consisting of custom typography scaling, adaptive grid maps, and standard form variations was configured from absolute scratch inside Figma to ensure structural UI cohesion across distinct digital properties.">
+                <div class="card-content">
+                    <span class="project-tag">UI/UX Design</span>
+                    <h3>E-Commerce Interface Concept</h3>
+                    <p>A clean, functional visual interface blueprint optimized carefully for consumer journeys and dynamic page layout flows.</p>
+                    <div class="card-links">
+                        <button class="btn-primary open-modal-btn">Read Case Study</button>
+                        <a href="#" class="btn-secondary">Figma</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Universal Dynamic Modal Window Overlay -->
+    <div id="caseStudyModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn" aria-label="Close case study">&times;</button>
+            <div class="modal-body">
+                <span id="modalTag" class="project-tag"></span>
+                <h3 id="modalTitle">Project Title Loaded Dynamically</h3>
+                
+                <div class="modal-meta">
+                    <strong>Stack / Tools:</strong> <span id="modalTech">Stack details</span>
+                </div>
+                
+                <hr>
+                
+                <h4>Technical Overview & Milestones</h4>
+                <p id="modalDescription">Detailed information text regarding project obstacles, approaches, and programmatic achievements will load inside this wrapper text box dynamically.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Layout Footer Module -->
+    <footer>
+        <p>&copy; 2026 Reyn Gwyneth Fernandez. Structured for High Performance & Accessibility.</p>
+    </footer>
+
+    <!-- Combined Logic Interactivity Script Engine -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* --- SECTION 1: DYNAMIC LAYOUT CARD FILTER ENGINE --- */
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update layout active class styling states
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const selectedFilter = button.getAttribute('data-filter');
+
+                    projectCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        
+                        if (selectedFilter === 'all' || cardCategory === selectedFilter) {
+                            // Smooth layout entry animation sequence
+                            card.style.display = 'flex';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1) translateY(0)';
+                            }, 10);
+                        } else {
+                            // Smooth exit layout animation sequence
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.95) translateY(5px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 250);
+                        }
+                    });
+                });
+            });
+
+
+            /* --- SECTION 2: SINGLETON POP-UP CASE STUDY MODAL ENGINE --- */
+            const modal = document.getElementById('caseStudyModal');
+            const closeBtn = document.querySelector('.modal-close-btn');
+            const openButtons = document.querySelectorAll('.open-modal-btn');
+            
+            // Dynamic UI Targets
+            const modalTag = document.getElementById('modalTag');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalTech = document.getElementById('modalTech');
+            const modalDescription = document.getElementById('modalDescription');
+
+            openButtons.forEach(btn => {
+                btn.addEventListener('click', (event) => {
+                    // Traverse DOM to find specific card contextual data attributes
+                    const specificCard = event.target.closest('.project-card');
+                    
+                    const titleText = specificCard.querySelector('h3').textContent;
+                    const tagText = specificCard.querySelector('.project-tag').textContent;
+                    const techStack = specificCard.getAttribute('data-tech');
+                    const fullCaseDetails = specificCard.getAttribute('data-details');
+
+                    // Map attributes directly inside modal container structure
+                    modalTag.textContent = tagText;
+                    modalTitle.textContent = titleText;
+                    modalTech.textContent = techStack || 'Vanilla Architecture Setup';
+                    modalDescription.textContent = fullCaseDetails || 'The requested engineering layout notes will follow shortly.';
+
+                    // Toggle visibility layout class configurations
+                    modal.classList.add('is-active');
+                    document.body.style.overflow = 'hidden'; // Stop viewport scroll leaks
+                });
+            });
+
+            // Reusable close layout routing
+            const closeCaseStudyModal = () => {
+                modal.classList.remove('is-active');
+                document.body.style.overflow = ''; // Unlock baseline scrolling
+            };
+
+            // Event Listeners for closing modal safely
+            closeBtn.addEventListener('click', closeCaseStudyModal);
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeCaseStudyModal();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+                    closeCaseStudyModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
